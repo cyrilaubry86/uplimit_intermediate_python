@@ -63,17 +63,17 @@ def get_sales_information(file_path: str) -> Dict:
 # batches the files based on the number of processes
 def batch_files(file_paths: List[str], n_processes: int) -> List[set]:
     if n_processes > len(file_paths):
-        return #### [YOUR CODE HERE] ####
+        return []
 
-    n_per_batch = #### [YOUR CODE HERE] ####
+    n_per_batch = len(file_paths) // n_processes
 
     first_set_len = n_processes * n_per_batch
     first_set = file_paths[0:first_set_len]
-    second_set = #### [YOUR CODE HERE] ####
+    second_set = file_paths[first_set_len:]
 
     batches = [set(file_paths[i:i + n_per_batch]) for i in range(0, len(first_set), n_per_batch)]
     for ind, each_file in enumerate(second_set):
-        #### [YOUR CODE HERE] ####
+        batches[ind].add(each_file)
 
     return batches
 
@@ -148,7 +148,7 @@ def main() -> List[Dict]:
 
     parser = argparse.ArgumentParser(description="Choose from one of these : [tst|sml|bg]")
     parser.add_argument('--type',
-                        default='tst',
+                        default='bg',
                         choices=['tst', 'sml', 'bg'],
                         help='Type of data to generate')
     args = parser.parse_args()
@@ -165,6 +165,8 @@ def main() -> List[Dict]:
 
     ######################################## YOUR CODE HERE ##################################################
     with multiprocessing.Pool(processes=n_processes) as pool:
+        revenue_data = pool.starmap(run, [(batch, n_process) for n_process, batch in enumerate(batches)])
+        revenue_data = flatten(revenue_data)
         
     ######################################## YOUR CODE HERE ##################################################
 
@@ -173,12 +175,15 @@ def main() -> List[Dict]:
 
     ######################################## YOUR CODE HERE ##################################################
     for yearly_data in revenue_data:
-        
+        with open(os.path.join(output_save_folder, f'{yearly_data["file_name"]}.json'), 'w') as f:
+            f.write(json.dumps(yearly_data))
 
-    ######################################## YOUR CODE HERE ##################################################
+        plot_sales_data(yearly_revenue=yearly_data['revenue_per_region'], year=yearly_data["file_name"],
+        plot_save_path=os.path.join(output_save_folder, f'{yearly_data["file_name"]}.png'))
+        
         
     # should return revenue data
-    return #### [YOUR CODE HERE] ####
+    return revenue_data
 
 
 if __name__ == '__main__':

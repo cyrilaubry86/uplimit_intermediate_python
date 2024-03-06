@@ -1,6 +1,6 @@
 from typing import List
 from pprint import pprint
-from w1.utils import Stats, DataReader
+from utils import Stats, DataReader
 from tqdm import tqdm
 import os
 
@@ -95,7 +95,7 @@ class DataProcessor:
         return aggregate
 
 if __name__ == '__main__':
-    fp = '/workspaces/uplimit_intermediate_python/data/tst/2015.csv'
+    fp = '/workspaces/uplimit_intermediate_python/data/tst/2016.csv'
     dp = DataProcessor(fp)
 
     print(dp.aggregate('TotalPrice'))

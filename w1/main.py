@@ -37,6 +37,8 @@ def revenue_per_region(dp: DataProcessor) -> Dict:
         'Germany': 53.699999999999996,
         'India': 55.78,
         'Italy': 90.45,
+        \
+        ]
         'Japan': 76.10000000000001,
         'Russia': 87.31,
         'United Kingdom': 29.05,
@@ -52,6 +54,7 @@ def revenue_per_region(dp: DataProcessor) -> Dict:
 
     # initialize the aggregate variable
     aggregate = dict()
+
 
     for row in tqdm(data_reader_gen):
         if row[constants.OutDataColNames.COUNTRY] not in aggregate:
@@ -80,7 +83,7 @@ def get_sales_information(file_path: str) -> Dict:
 def main():
     parser = argparse.ArgumentParser(description="Choose from one of these : [tst|sml|bg]")
     parser.add_argument('--type',
-                        default='tst',
+                        default='bg',
                         choices=['tst', 'sml', 'bg'],
                         help='Type of data to generate')
     args = parser.parse_args()
