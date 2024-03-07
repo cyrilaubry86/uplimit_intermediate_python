@@ -275,7 +275,7 @@ def bg():
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Choose from one of these : [tst|sml|bg]")
     parser.add_argument('--type',
-                        default='tst',
+                        default='bg',
                         choices=['tst', 'sml', 'bg'],
                         help='Type of data to generate')
     args = parser.parse_args()

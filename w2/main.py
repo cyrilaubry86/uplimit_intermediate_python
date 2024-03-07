@@ -144,7 +144,7 @@ def main() -> List[Dict]:
     """
 
     st = time.time()
-    n_processes = 3 # you may modify this number - check out multiprocessing.cpu_count() as well
+    n_processes = 7  # you may modify this number - check out multiprocessing.cpu_count() as well
 
     parser = argparse.ArgumentParser(description="Choose from one of these : [tst|sml|bg]")
     parser.add_argument('--type',
@@ -168,6 +168,8 @@ def main() -> List[Dict]:
         revenue_data = pool.starmap(run, [(batch, n_process) for n_process, batch in enumerate(batches)])
         revenue_data = flatten(revenue_data)
         
+        pool.close()
+        pool.join()
     ######################################## YOUR CODE HERE ##################################################
 
     en = time.time()
@@ -187,5 +189,5 @@ def main() -> List[Dict]:
 
 
 if __name__ == '__main__':
-    res = main()
-    pprint(res)
+    result = main()
+    pprint(result)
