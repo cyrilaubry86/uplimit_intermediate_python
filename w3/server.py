@@ -8,6 +8,7 @@ from starlette.websockets import WebSocket, WebSocketState
 from w3.utils.websocket import ConnectionManager
 from w3.utils.response_model import ProcessStatus
 from w3.utils.database import DB
+import sqlite3
 
 app = FastAPI()
 manager = ConnectionManager()
@@ -43,6 +44,8 @@ async def get() -> Dict:
 
     ######################################## YOUR CODE HERE ##################################################
 
+    return {"status": "ok"}
+
     ######################################## YOUR CODE HERE ##################################################
 
 
@@ -64,5 +67,8 @@ async def get() -> List[ProcessStatus]:
     Get all the records from the process table and return it using the pydantic model ProcessStatus
     """
     ######################################## YOUR CODE HERE ##################################################
+    db = DB()
+    processes = db.read_all()
 
+    return [ProcessStatus(**process) for process in processes]
     ######################################## YOUR CODE HERE ##################################################
