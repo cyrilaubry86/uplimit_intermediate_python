@@ -56,7 +56,10 @@ async def get() -> HTMLResponse:
     should render the HTML file - index.html when a user goes to http://127.0.0.1:8000/
     """
     ######################################## YOUR CODE HERE ##################################################
-
+    with open("index.html") as file:
+        html = file.read()
+        file.close()
+    return HTMLResponse(html)
     ######################################## YOUR CODE HERE ##################################################
 
 
