@@ -32,24 +32,15 @@ class Logger:
 
     def warning(self, msg):
         self.logger.warning(msg)
-        ######################################## YOUR CODE HERE ##################################################
-        ######################################## YOUR CODE HERE ##################################################
 
     def error(self, msg):
         self.logger.error(msg)
-        ######################################## YOUR CODE HERE ##################################################
-        ######################################## YOUR CODE HERE ##################################################
 
     def info(self, msg):
         self.logger.info(msg)
-        ######################################## YOUR CODE HERE ##################################################
-        ######################################## YOUR CODE HERE ##################################################
 
     def debug(self, msg):
         self.logger.debug(msg)
-        ######################################## YOUR CODE HERE ##################################################
-        ######################################## YOUR CODE HERE ##################################################
-
 
 server_logger = Logger(log_file_name='server_logs.txt', module_name='server_logs')
 main_logger = Logger(log_file_name='main_logs.txt', module_name='main_logs')
